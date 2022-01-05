@@ -1,0 +1,1019 @@
+var pull = 250;
+var pull2 = 350;
+var pull3 = 450;
+var pull4 = 550;
+var pull5 = 650;
+var placeX =321;
+var placeY = 366+25;
+var health = 100;
+ var drop = 200;
+ var drop2 = 200;
+ var drop3 = 200;
+ var ball = 200;
+ var ball2 = 200;
+ var ball3 = 200;
+var ballOut = -3;
+var zapperS = 0.8;
+var beam1 = 75;
+var beam2 = 150;
+var beam3 = 225;
+var beam4= 300;
+var beam5 = 375;
+var beam6 = 0;
+
+var playerSpeed = 4; 
+var zapper = 151;
+  var zapperX = 137;
+var healY = 397;
+var healX = 152;
+var healY2 = 397;
+var healX2 = 482;
+var stunning = 0;
+var time = 0;
+ 
+var picture = 0;
+var drawPink = function(x,y,mood, fade){
+    if(mood === 1){
+        noStroke();
+    fill(255, 0, 230,fade);
+    rect(x,y,100,100,25);
+    fill(0, 0, 0,fade);
+    ellipse(x+31,y+33,15,15);
+    ellipse(x+73,y+33,15,15);
+    noFill();
+    stroke(0, 0, 0,fade);
+    strokeWeight(7);
+    arc(x+52,y+69,52,12,7,180);
+    }
+    if(mood === 2){
+        noStroke();
+    fill(255, 0, 230,fade);
+    rect(x,y,100,100,25);
+    fill(0, 0, 0,fade);
+    
+    noFill();
+    stroke(0, 0, 0,fade);
+    strokeWeight(7);
+    arc(x+28,y+35,17,-20,-1,180);
+    arc(x+68,y+35,17,-20,-1,180);
+    arc(x+52,y+69,52,26,5,180);
+    }
+    if(mood === 3){
+        noStroke();
+    fill(255, 0, 230,fade);
+    rect(x,y,100,100,25);
+    fill(0, 0, 0);
+    
+    noFill();
+    stroke(0, 0, 0,fade);
+    
+    
+    
+    
+    strokeWeight(7);
+    
+    arc(x+28,y+35,17,0,-1,180);
+    
+    arc(x+68,y+35,17,0,-1,180);
+    arc(x+52,y+69,52,-3,5,180);
+    }
+    if(mood === 4){
+        noStroke();
+    fill(255, 0, 230,fade);
+    rect(x,y,100,100,25);
+    fill(0, 0, 0,fade);
+    ellipse(x+31,y+33,15,15);
+    ellipse(x+73,y+33,15,15);
+    noFill();
+    stroke(0, 0, 0);
+    
+    
+    
+    strokeWeight(7);
+    
+    
+    line(x+34,y+79,x+79,y+64);
+    }
+};
+var drawTeal = function(x,y){
+    noStroke();
+    fill(0, 255, 140);
+    rect(x,y,100,100,25);
+    fill(0, 0, 0);
+    ellipse(x+31,y+33,15,15);
+    ellipse(x+72,y+33,15,15);
+    noFill();
+    stroke(0, 0, 0);
+    strokeWeight(7);
+    line(x+24,y+69,x+66,y+69);
+};
+var drawSpark = function(x,y,s){
+noStroke();
+scale(s);
+fill(102, 90, 14);
+triangle((110+x),(89+y),(154+x),(166+y),(180+x),(152+y));
+triangle((276+x),(88+y),(154+x),(203+y),(225+x),(195+y));
+fill(85, 81, 194);
+ellipse(200+x,200+y,126,125);
+fill(245, 0, 0);
+arc(174+x,178+y,20,20,231,425);
+arc(220+x,178+y,20,20,100,310);
+stroke(17, 0, 255);
+line((132+x),(111+y),(253+x),(112+y));
+fill(0, 217, 255);
+ellipse(193+x,112+y,50,38);
+};
+var drawZap = function(x,y,s)
+{ 
+    var fade = 0;
+  var aura = 50;
+    var shockingArray = [(x+20)*s,(x+11)*s,(x+30)*s,(x+-4)*s,(x+4)*s,(x+25)*s,(x+-14)*s,(x+27)*s,(x+31)*s,(x+2)*s,(x+31)*s,(x+-16)*s,(x+28)*s,(x+31)*s,(x+29)*s,(x+-7)*s,(x+36)*s,(x+-15)*s,(x+-3)*s,(x+38)*s,]; 
+    var shockingArrax = [(y+20)*s,(y+11)*s,(y+30)*s,(y+-4)*s,(y+4)*s,(y+25)*s,(y+-14)*s,(y+27)*s,(y+31)*s,(y+2)*s,(y+31)*s,(y+-16)*s,(y+28)*s,(y+31)*s,(y+29)*s,(y+-7)*s,(y+36)*s,(y+-15)*s,(y+-3)*s,(y+38)*s,]; 
+    stroke(255, 242, 0,70);
+    noFill();
+  beginShape();
+  
+  vertex(shockingArray[floor(random(0,shockingArray.length))],shockingArrax[floor(random(0,shockingArrax.length))]);
+  vertex(shockingArray[floor(random(0,shockingArray.length))],shockingArrax[floor(random(0,shockingArrax.length))]);
+  vertex(shockingArray[floor(random(0,shockingArray.length))],shockingArrax[floor(random(0,shockingArrax.length))]);
+  vertex(shockingArray[floor(random(0,shockingArray.length))],shockingArrax[floor(random(0,shockingArrax.length))]);
+  
+  
+  
+  endShape();
+  while ( fade < 255) {
+       fade = fade + 45;
+       
+   while (aura < 150) {
+       aura = aura+ 10;
+       noStroke();
+   fill(180,210,6,fade);
+   ellipse((x)*s, (y)*s, (aura+-158)*s, (aura+28)*s);
+ } 
+}   
+}; 
+ var drawStun = function(){
+     
+     if((placeX) - (zapperX*zapperS) < 50){
+      
+    if((placeY) - (zapper*zapperS) < 50){
+       
+      if((zapperX*zapperS) - (placeX) < 50){
+           
+        if((zapper*zapperS) - placeY < 50){
+            
+            stunning = floor(random(0,10));
+               if(stunning !== 10)
+               {
+            playerSpeed = 0;
+               }   
+         
+        }
+      }
+    }
+     }
+     
+
+};  
+var pulling = 0;  
+//this ditermines what side the magnet wave will be
+var direct = floor(random(0,2));
+//the magnet wave function
+var drawMan = function(x,y,s,spin){
+  noFill();
+ 
+  strokeWeight(4*s);
+  var core=200;
+   pull = pull - 2;
+  pull2 = pull2 - 2;
+  pull3 = pull3 - 2;
+  pull4 = pull4 - 2;
+  pull5 = pull4 - 2;
+  stroke(247, 0, 255);
+  arc(core+x,core+y,pull*s,pull*s,spin+77,spin+247);
+  arc(core+x,core+y,pull2*s,pull2*s,spin+77,spin+247);
+  arc(core+x,core+y,pull3*s,pull3*s,spin+77,spin+247);
+  arc(core+x,core+y,pull4*s,pull4*s,spin+77,spin+247);
+  arc(core+x,core+y,pull5*s,pull5*s,spin+77,spin+247);
+  if(pull < 1*s){
+   pull = 1425*s;   
+  } 
+  if(pull2 < 4*s){
+   pull2 = 1400*s;   
+  } 
+  if(pull3 < 3*s){
+   pull3 = 1150*s;   
+  } 
+  if(pull4 < 4*s){
+   pull4 = 1400*s;   
+  } 
+  if(pull5 < 3*s){
+   pull5 = 1400*s;   
+  } 
+};
+// the circles that are not doing much besides falling
+var drawOrb = function(x,y,s){
+  var drop = 200;
+  strokeWeight(7*s);
+   stroke(193, 172, 242);
+  
+   var cloud = random(-30*s,30*s);
+var light = 200 + cloud;
+var thud  = 200 - cloud;  
+fill(247, 247, 247);
+point(thud+x-200,thud+y-201);
+point(light+x-200,thud+y-204);
+noStroke();
+var fade = 0;
+var aura = 50;
+
+   while ( fade < 255) {
+       fade = fade + 45;
+       
+   while (aura < 150) {
+       aura = aura+ 10;
+       noStroke();
+   fill(127, fade, 247,fade);
+   ellipse(x, y, aura*s, aura*s);
+   
+
+
+} 
+} 
+ball = ball + 2.5;
+};
+
+
+var x = 30;
+textSize(30);
+
+background(0, 179, 255);
+//some text stuff
+{
+var chatFull = ["By the way, do you know what Spark is?","Be glad that the Stun Zap does little to no damage","The Magnet wave is a weird attack, hope you don't have to face it","Spark is a lightning creature that's about two years old","If you hate the stun, it only temporary, you're fine","The lightning monsters of the land are most of the time docile","Spark is a strong opponent, but he not overpowered","Sometimes I wish you would just lose","Har har har, we are not in a game","What are you, Mr. Perfect?","I am not random... Cool pizza","Come on, fight for freedom and of course me","Are you even listening?","What's the meaning of life, 42"];
+var chatHalf = ["You know what, that wish of you losing was a bad one","You know what, that wish of you losing was a bad one","Did you give it your all? Battle the thunder","I said that I'm not random!","I said that I'm not random!","You're the one, that was destined to win when all hope was lost","The lightning of the land are strong, even when they're babies like the monster","Relax, you're not dead, if you were...","Relax, you're not dead, if you were...","Relax, you're not dead, if you were...","I said that I'm not random!","You're the one, that was destined to win when all hope was lost","You're amazing, I would of just ra-beat Spark up","You're amazing, I would of just ra-beat Spark up","Hearts, where are they, in people's ribcages","Hearts, where are they, in people's ribcage","I wish that I could help just a bit more...","Spark was suppose to stay away from mankind, but something happen","You know something that I don't, what is it?","I want to help you, but I can't yet","I want to help you, but I can't yet","I want to help you, but I can't yet"];
+var chatLow = ["Don't die, Don't die, DON't DIE","Spark was free, to cause havoc around the world, and I can...","You keep your secrets, I keep mine. Deal?","I really really wish I could help you","Give everything you got, I know you can do this","Hope, something that people neglect when it is fine","To win you must- I must tell you something","By the way, what is your name?","Yes, I'll admitt, I'm random","I need you to nearly die...","Don't die, Don't die, DON't DIE","Spark was free, to cause havoc around the world, and I can...","You keep your secrets, I keep mine. Deal?","I really really wish I could help you","Give everything you got, I know you can do this","Hope, something that people neglect when it is fine","To win you must- I must tell you something","By the way, what is your name?","Yes, I'll admitt, I'm random","I need you to nearly die...","Don't die, Don't die, DON't DIE","Spark was free, to cause havoc around the world, and I can...","You keep your secrets, I keep mine. Deal?","I really really wish I could help you","Give everything you got, I know you can do this","Hope, something that people neglect when it is fine","To win you must- I must tell you something","By the way, what is your name?","Yes, I'll admitt, I'm random","I need you to nearly die...","Don't die, Don't die, DON't DIE","Spark was free, to cause havoc around the world, and I can...","You keep your secrets, I keep mine. Deal?","I really really wish I could help you","Give everything you got, I know you can do this","Hope, something that people neglect when it is fine","To win you must- I must tell you something","By the way, what is your name?","Yes, I'll admitt, I'm random","I need you to nearly die..."];
+}
+var beam = 1;
+var power = 200;
+var drawMega = function(x,size,y1,y2,y3,y4,y5,y6){
+    noStroke();
+    fill(0, 97, 194,140);
+    var zip = 0;
+  var flash = 5;
+  
+    
+    ellipse(x,power+beam6,70*size,40*size);
+    ellipse(x,power+beam1,70*size,40*size); 
+    ellipse(x,power+beam2,70*size,40*size);
+    ellipse(x,power+beam3,70*size,40*size);
+     ellipse(x,power+beam4,70*size,40*size);
+    ellipse(x,power+beam5,70*size,40*size);
+     
+    
+    power = power + 15;
+while ( zip < 255) {
+       zip = zip + 35; 
+       
+   while (flash < 65) {
+       flash = flash + 3;
+     
+stroke(8, 236, 240,zip);
+strokeWeight(flash*size); 
+      line(x,0,x,600);
+      
+}    
+} 
+
+
+};
+
+var advice1 = floor(random(0,chatFull.length));
+var advice2 = floor(random(0,chatHalf.length));
+var advice3 = floor(random(0,chatLow.length));
+var help = function(one,two,three){  
+frameRate(60);
+   
+    fill(255, 255, 255);
+rect(125,421,437,133,50);
+if(health > 70){
+    fill(0, 0, 0);
+      
+      text(chatFull[one],129,450,429,195);
+            
+
+    noStroke();
+ fill(255, 0, 230);
+rect(15,475,100,100,29);
+
+fill(0, 0, 0);
+ellipse(89,513,15,15);
+ellipse(46,514,15,15);
+stroke(0, 0, 0);
+strokeWeight(8);
+noFill();
+arc(68,544,52,12,7,180);
+}
+if(health < 69.999999&&health>39.9999999){
+    fill(0, 0, 0);
+    text(chatHalf[two],129,450,429,195);   
+   
+    noStroke();
+ fill(255, 0, 230);
+rect(15,475,100,100,29);
+
+fill(0, 0, 0);
+ellipse(89,513,15,15);
+ellipse(46,514,15,15);
+stroke(0, 0, 0);
+strokeWeight(8);
+noFill();
+line(39,550,98,540);
+}
+    if(health < 40&&health>0){
+    fill(0, 0, 0);
+    text(chatLow[three],129,450,429,195);   noStroke();
+ fill(255, 0, 230);
+rect(15,475,100,100,29);
+
+fill(0, 0, 0);
+ellipse(89,513,15,15);
+ellipse(46,514,15,15);
+stroke(0, 0, 0);
+strokeWeight(8);
+noFill();
+arc(68,550,52,-15,7,180);
+
+} 
+
+};
+//the background
+var back = function(){
+    background(30, 50, 110);
+    noStroke();
+    fill(97, 32, 14);
+   triangle(58,534,217,450,51,72); 
+   triangle(382,443,550,550,535,72);
+   fill(125, 60, 20);
+   rect(0,413,609,195);
+   //I too lazy to do it the effective way of using a for loop
+   fill(236, 255, 127);
+   ellipse(148,107,10,10);
+   ellipse(363,195,10,10);
+   ellipse(201,154,10,10);
+   ellipse(262,55,10,10);
+   ellipse(387,247,10,10);
+   ellipse(35,226,10,10);
+   ellipse(377,307,10,10);
+   ellipse(220,264,10,10);
+   ellipse(398,62,10,10);
+};
+var drawHeal = function(){
+    strokeWeight(7);
+    stroke(255, 0, 217);
+ //point(healX, healY);
+ 
+ if((placeX) - healX < 10){
+       
+    if((placeY) - healY < 50){
+       
+      if(healX - (placeX) < 10){
+           
+        if(healY - placeY < 50){
+          //println(placeX + " " + drop + " " + placeY + " " + ball);    
+         playerSpeed = 4;
+         
+        }
+      }
+    }
+  } 
+  healX = healX +2;
+  if(healX > 600)
+  {
+direct = floor(random(0,4)); 
+   
+   if(direct === 0){
+    pulling = 0.75;
+    this.h = -0.75;
+   }
+   if(direct === 1){
+    pulling = -0.75;
+    this.h = 0.75;
+   }
+   
+   healX = 0;   
+  }
+  strokeWeight(7);
+    stroke(0, 85, 255);
+ //point(healX2, healY2);
+  if((placeX) - healX2 < 10){
+       
+    if((placeY) - healY2 < 50){
+       
+      if(healX2 - (placeX) < 10){
+           
+        if(healY2 - placeY < 50){
+          //println(placeX + " " + drop + " " + placeY + " " + ball);    
+         playerSpeed = 4;
+           
+        }
+      }
+    }
+  } 
+  healX2 = healX2 +2;
+  if(healX2 > 600)
+  {
+      advice1 = floor(random(0,chatFull.length));
+ advice2 = floor(random(0,chatHalf.length));
+ advice3 = floor(random(0,chatLow.length));
+   healX2 = 0;
+   
+  }
+};
+var distance = function(){
+    
+};
+var keys = [];
+var drawHeal = function(){
+    strokeWeight(7);
+    stroke(255, 0, 217);
+ //point(healX, healY);
+ 
+ if((placeX) - healX < 10){
+       
+    if((placeY) - healY < 50){
+       
+      if(healX - (placeX) < 10){
+           
+        if(healY - placeY < 50){
+          //println(placeX + " " + drop + " " + placeY + " " + ball);    
+         playerSpeed = 4;
+         
+        }
+      }
+    }
+  } 
+  healX = healX +10;
+  //I am Ivar
+  if(healX > 600)
+  {
+direct = floor(random(0,2)); 
+   
+   if(direct === 0){
+    pulling = -0.75;
+   }
+   if(direct === 1){
+    pulling = 0.75;
+   }
+   healX = -2000;
+  }
+  strokeWeight(7);
+    stroke(0, 85, 255);
+ //point(healX2, healY2);
+  if((placeX) - healX2 < 10){
+       
+    if((placeY) - healY2 < 50){
+       
+      if(healX2 - (placeX) < 10){
+           
+        if(healY2 - placeY < 50){
+          //println(placeX + " " + drop + " " + placeY + " " + ball);    
+         playerSpeed = 4;
+           
+        }
+      }
+    }
+  } 
+  healX2 = healX2 +10;
+  if(healX2 > 600)
+  {
+      if (health < 99){
+      health = health + 1;
+      }
+      advice1 = floor(random(0,chatFull.length));
+ advice2 = floor(random(0,chatHalf.length));
+ advice3 = floor(random(0,chatLow.length));
+   healX2 = -2000;
+   
+  }
+};
+//the player movement
+keyPressed = function() {keys[keyCode] = true;};
+keyReleased = function() {keys[keyCode] = false;};
+var Player = function(playerX, playerY, size,push){
+    this.x = playerX;
+    this.y = playerY;
+    this.s = size;
+    this.h = push;
+     
+    this.draw = function() {
+        
+        noStroke();
+        rectMode(CENTER);
+        if(playerSpeed > 0){
+        fill(0, 255, 140);
+        rect(this.x, this.y, this.s * 55, this.s * 55, this.s * 12);      
+        fill(0, 0, 0);
+        ellipse(this.x + -6, this.y + -7, this.s * 8, this.s * 8);
+        ellipse(this.x + 14, this.y + -7, this.s * 8, this.s * 8); 
+        strokeWeight(5);
+        stroke(0, 0, 0);
+        line(this.x + -5, this.y + 11, this.x + 43-25, this.y + 11);
+        }
+        if(playerSpeed === 0){
+        fill(0, 255, 140);
+        rect(this.x, this.y, this.s * 55, this.s * 55, this.s * 12);      
+        fill(0, 0, 0);
+        ellipse(this.x + -6, this.y + -7, this.s * 10, this.s * 10);
+        ellipse(this.x + 14, this.y + -7, this.s * 10, this.s * 10); 
+        strokeWeight(6);
+        stroke(0, 0, 0);
+        line(this.x + -5, this.y + 11, this.x + 43-25, this.y + 11);
+        strokeWeight(6);
+        stroke(193, 247, 0);
+        point(placeX + random(-30,30),placeY + random(-30,30));
+        }
+        rectMode(CORNER);
+        var m =  (keys[RIGHT]) ? this.x=this.x + playerSpeed :(keys[LEFT]) ? this.x= this.x - playerSpeed :  false;
+        var n =  (keys[RIGHT]) ? placeX=placeX + playerSpeed :(keys[LEFT]) ? placeX= placeX - playerSpeed :  false;
+        var k = this.x = this.x +pulling;
+        var w = (placeX = placeX + pulling);
+        
+    };
+};
+
+//one of the effect of the magnet wave
+//I am Ivar
+if(direct === 0){
+       
+       pulling = -0.75;
+       
+    }
+if(direct === 1){
+        
+       pulling = 0.75;
+       
+    }
+    
+//It's working, It's working, Thanks Tovd for the refence 
+
+var drawHit = function()
+{
+    stroke(0, 0, 0);
+    rectMode(CORNERS);
+  if(placeX > 600||placeX < -0){
+      health--;
+  }
+  if((placeX) - drop < 50){
+       
+    if((placeY) - ball < 50){
+       
+      if(drop - (placeX) < 50){
+           
+        if(ball - placeY < 50){
+          //println(placeX + " " + drop + " " + placeY + " " + ball);    
+         health = health - random(9,11);
+         ball = 0;
+          drop = random(40,560);
+          
+        }
+      }
+    }
+  }
+  rectMode(CORNER);
+  if((placeX) - drop2 < 50){
+      
+    if((placeY) - ball2 < 50){
+       
+      if(drop2 - (placeX) < 50){
+           
+        if(ball2 - placeY < 50){
+               
+         health = health - random(9,11);
+         ball2 = 0;
+          drop2 = random(40,560);
+         
+        }
+      }
+    }
+  }
+   if((placeX) - (zapperX*zapperS) < 50){
+      
+    if((placeY) - (zapper*zapperS) < 50){
+       
+      if((zapperX*zapperS) - (placeX) < 50){
+           
+        if((zapper*zapperS) - placeY < 50){
+          playerSpeed = 0;     
+         health = health - random(1,3);
+         zapper = random(-800,-1000);
+          zapperX = random(40,560);
+         drawStun();
+        }
+      }
+    }
+  }
+  if((placeX) - (beam) < 50){
+      
+    if((placeY) - (beam6) < 50){
+       
+      if((beam) - (placeX) < 50){
+           
+        if((beam6) - placeY < 50){
+               
+         health -= 0.1;
+         
+        }
+      }
+    }
+  }
+  if((placeX) - (beam) < 50){
+      
+    if((placeY) - (beam1) < 50){
+       
+      if((beam) - (placeX) < 50){
+           
+        if((beam1) - placeY < 50){
+               
+         health -= 0.1;
+         
+          
+        }
+      }
+    }
+  }
+  if((placeX) - (beam) < 50){
+      
+    if((placeY) - (beam2) < 50){
+       
+      if((beam) - (placeX) < 50){
+           
+        if((beam2) - placeY < 50){
+               
+         health -= 0.1;
+         
+          
+        }
+      }
+    }
+  }
+  if((placeX) - (beam) < 50){
+      
+    if((placeY) - (beam3) < 50){
+       
+      if((beam) - (placeX) < 50){
+           
+        if((beam3) - placeY < 50){
+               
+         health -= 0.1;
+         
+          
+        }
+      }
+    }
+  }
+  if((placeX) - (beam) < 50){
+      
+    if((placeY) - (beam4) < 50){
+       
+      if((beam) - (placeX) < 50){
+           
+        if((beam4) - placeY < 50){
+               
+         health -= 0.1;
+         
+          
+        }
+      }
+    }
+  }
+  if((placeX) - (beam) < 70){
+      
+    if((placeY) - (beam5) < 50){
+       
+      if((beam) - (placeX) < 70){
+           
+        if((beam5) - placeY < 50){
+               
+         health -= 0.45;
+         
+          
+        }
+      }
+    }
+  }
+  
+  
+};
+
+  /**if(x1 - x3 < 40){
+    if(y1 - y3 < 40){
+      if(x3 - x1 < 40){
+        if(y3 - y1 < 40){
+         life--;
+         y3 = 0;
+          x3 = random(40,360);
+        }
+      }
+    }
+  }**/
+var message = 0;
+//the player
+drawStun();
+    var p = new Player(placeX, placeY, 1,pulling);
+   
+var drawFive = function(){
+
+mouseClicked = function(){
+    picture++;
+};
+draw = function() {
+    background(0, 88, 94);
+    textSize(30);
+    fill(176, 0, 0);
+   
+    background(5, 3, 148);
+    fill(255, 0, 0);
+    textSize(25);
+    text("You have lost, all hope is gone, Press the restart, to change time once again. You can make tis world brand new, make a future life, too. I know that you can make this right, have you pressed the restart button yet? Come on what are you doing, restart so that we can live, I give up on you. You no going to kill everyone just restart!",90,98,500,500);
+    if(picture === 0){
+        background(8, 31, 242);
+    drawPink(60,431,2,255);
+    drawTeal(422,431);
+    fill(27, 7, 54);
+    text("Yay! Took long enough for Spark to run out of power",78,75,299,200);
+    text("Whatever, I thought I would have to do...",78,240,299,200);
+    fill(22, 41, 0);
+    text("You never told me that Spark doesn't have a infinte amount of electricity",283,153,299,200);
+    }
+     if(picture === 1){
+        background(8, 31, 242);
+    drawPink(60,431,4,245);
+    drawTeal(422,431);
+    fill(27, 7, 54);
+    text("It's nothing",78,166,299,200);
+    text("Go find the ruler of fire",78,309,288,198);
+    fill(22, 41, 0);
+    text("You would have to do what? ",283,75,299,200);
+     text("That means you don't want to say it",283,222,299,200);
+    }
+    if(picture === 2){
+        background(8, 31, 242);
+    drawPink(60,431,3,240);
+    drawTeal(422,431);
+    fill(27, 7, 54);
+    text("Get there and defeat the ruler of fire",78,166,299,200);
+    text("No, I'm going a different path, I'm going beat Spark for real",78,309,288,198);
+    fill(22, 41, 0);
+    text("That was random, even for you",283,75,299,200);
+     text("So, you're coming?",283,222,299,200);
+    }
+    if(picture === 3){
+        background(8, 31, 242);
+    drawPink(60,431,3, 230);
+    drawTeal(422,431);
+    fill(27, 7, 54);
+    text("So? That does not matter",78,166,299,200);
+    text("I am?",78,309,288,198);
+    fill(22, 41, 0);
+    text("You seem a bit more serious than usual",283,75,299,200);
+     text("Also, you fading",283,222,299,200);
+    }
+    if(picture === 4){
+        background(8, 31, 242);
+    drawPink(60,431,1, 220);
+    drawTeal(422,431);
+    fill(27, 7, 54);
+    text("Okay",78,166,299,200);
+    text("Nah, I'm just going to go away to defeat Spark, and also... ",78,309,288,198);
+    fill(22, 41, 0);
+    text("Yes",283,75,299,200);
+     text("You're fading, which sometimes means you're dying",283,222,299,200);
+    }
+    if(picture === 5){
+        background(8, 31, 242);
+    drawPink(60,431,1, 200);
+    drawTeal(422,431);
+    fill(27, 7, 54,255);
+    text("Oh, yea, lose my memory ",78,166,299,200);
+    text("That's a good thing, that means I will forget about you",78,309,288,198);
+    fill(22, 41, 0);
+    text("Also...?",283,75,299,255);
+     text("You are going to pretty much die and you still... Nevermind",283,222,299,200);
+    }
+    if(picture === 6){
+        background(8, 31, 242);
+    drawPink(60,431,1, 160);
+    drawTeal(422,431);
+    fill(27, 7, 54,255);
+    text("That seems like a dumb question",78,166,299,200);
+    text("I... can't tell you, What's yours?",78,309,288,198);
+    fill(22, 41, 0);
+    text("What's your name?",283,75,299,255);
+     text("You asked me that earlier, what's your name?",283,222,299,200);
+    }
+    if(picture === 7){
+        background(8, 31, 242);
+    drawPink(60,431,1, 160);
+    drawTeal(422,431);
+    fill(27, 7, 54,255);
+    text("Ok... Bye NdashA",78,166,299,200);
+    fill(22, 41, 0);
+    text("NdashA",283,75,299,255);
+     
+    }
+    if(picture === 8){
+        background(8, 31, 242);
+    drawPink(60,431,2, 80);
+    drawTeal(422,431);
+    
+    fill(22, 41, 0);
+    text("My Name isn't NdashA, well, that means that I have to go to some fire place, 'Great'",283,75,299,255);
+     text("Sometimes I hate you, Sometimes I don't",78,236,299,200);
+    }
+    if(picture === 9){
+        background(8, 31, 242);
+    drawPink(60,431,1, 30);
+    drawTeal(422,431);
+    
+    fill(22, 41, 0);
+    text("Well, I may of won the fight, but, I haven't won the war.",283,161,299,255);
+     text("BYE!",78,97,299,200);
+    }
+     if(picture > 9){
+        background(8, 31, 242);
+ 
+    drawTeal(242,431);
+    
+    fill(22, 41, 0);
+    text("If you didn't know.",194,121,299,255);
+     textSize(90);
+     text("You've Won",76,297);
+    }
+};
+
+
+
+};
+
+var drawFour = function(){  
+   back();
+   textAlign(CENTER,CENTER);
+    textSize(30);
+    fill(22, 156, 201);
+    text("You have lost, all hope is gone, Press the restart, to change time once again. You can make ths world brand new, make a future life, too. I know that you can make this right, have you pressed the restart button yet? Come on what are you doing, restart so that we can live, I give up on you. You're not going to kill everyone just restart!",47,47,500,500);
+};
+
+var drawThree = function(){
+draw = function() {
+   
+
+    back();
+    drawMega(beam,1.5,beam1,beam2,beam3,beam4,beam5,beam6);
+    var shockingArray = [];     
+ drawHeal();
+  drawHit();  
+frameRate(60);
+
+    strokeWeight(7);
+   var cloud = random(7,25);
+ 
+drawZap(zapperX,zapper,zapperS);
+
+    
+ 
+zapper = zapper + 15;
+if(zapper > 600){
+zapper = random(-800,-1200); 
+zapperX = random(20,580);
+}
+    if (power > 624){
+      power = random(-3000,-2546);
+        power = power + 28;
+        beam = random(-500,1100);
+  }
+  //I am Ivar
+    if(direct === 0){
+       drawMan(-211,10,1,200);
+       pulling = -0.75;
+    }
+    if(direct === 1){
+       drawMan(403,10,1,16); 
+       pulling = 0.75;
+    }
+     
+    p.draw(); 
+    
+   
+    drawOrb(drop,ball,0.6);
+    drawOrb(drop2,ball2,0.6);
+    
+    
+    ball2 = ball2 + 4;
+   
+     if(ball > 500 ){
+  ball = 0;
+  drop = random(20,580);
+}
+ if(ball2 > 500 ){
+  ball2 = 0;
+  drop2 = random(20,580);
+  
+}
+
+message = message + 10;
+     noStroke();
+    help(advice1,advice2,advice3);
+    
+    fill(255, 112, 234);
+    text("Your health is: " + floor(health),147,585);
+    
+    if(health < 0){
+        time--;
+        drawFour();
+    }
+    time++;
+    if(time > 9750){
+     drawFive();   
+    }
+};
+
+};
+
+var drawTwo = function() {
+draw = function() {
+    background(0, 255, 247);
+    textSize(27);
+    text("Days ago, a village was destoryed by the great monster, Spark. Anddd, I just cut through the chase. Spark was three ways of Attacking, The purple orb is the most common attack, it may be a bit slow, but it does around 10 damage, (btw you have 100 HP), so ten orbs you are out. The Stun Zap is explained by the pink cube on the bottom, so you need to read while you're dodging. The Ultra Bolt is Spark's most Dangerous attack, it appears out of nowhere and does a lot of damage. Oh, the Maagnet wave, the pink thing, it just sucks you in its direction, so don't ever stay still. I think that's it, so press the restart button to go back to the menu.",10,53,550,550);
+    
+};
+
+
+ 
+};   
+var button = function(x1,y1,x2,y2,scene){
+   rectMode(CORNERS);
+    fill(255, 232, 232,30);
+    rect(x1,y1,x2,y2);
+    fill(28, 12, 12);
+    
+if(mouseIsPressed&&mouseX<(x2*2.4)&&mouseY<(y1*2.4)&&mouseX>(x1*2.4)&&mouseY>(y2*2.4)){
+     if(scene === 0){
+        rect(238,275,29,20);
+    }
+    
+    
+  
+   if(scene === 2){
+       drawTwo();
+   }
+   if(scene === 3){
+       drawThree();
+   }
+   if(scene === 4){
+       drawFour();
+   }
+   if(scene === 5){
+       drawFive();
+   }
+   
+}
+ 
+};
+var drawOne = function(){
+
+{
+
+
+draw = function() {
+ textSize(20);
+ 
+background(11, 0, 163);
+drawSpark(-90,-66,2.4);
+fill(247, 247, 247,220);
+rect(-200,-200,1000,1000);
+
+textSize(40);
+
+button(55,223,167,169,2);
+button(55,140,167,88,3);
+fill(145, 89, 0);
+text("(Play)",58,125);
+text("(Help)",58,207);
+fill(120, 38, 2);
+textSize(20);
+text("Spark Battle",52,64);
+textSize(30);
+};
+scale((1/2.4));
+
+}
+
+
+    
+};
+
+  
+
+
+drawOne();
